@@ -1,7 +1,7 @@
 # hugo server --themesDir ... --baseURL=http://0.0.0.0:1313/example
 
-baseURL: https://bnb1234.com/
-title: BTCBA
+baseURL: https://DYN-dev2024.github.io/
+title: DYN的区块链笔记
 theme: hugo-book
 disableKinds: ["taxonomy", "taxonomyTerm"]
 # themesDir: ../..
@@ -9,9 +9,9 @@ disableKinds: ["taxonomy", "taxonomyTerm"]
 # Book configuration
 disablePathToLower: true
 enableGitInfo: true
-services:
-  googleAnalytics:
-    ID: G-076TDWEBMQ
+# services:
+#   googleAnalytics:
+#     ID: G-076TDWEBMQ
 params:
   # (Optional, default true) Show or hide table of contents globally
   # You can also specify this parameter per page in front matter
@@ -35,7 +35,7 @@ params:
 
   # Set source repository location.
   # Used for 'Last Modified' and 'Edit this page' links.
-  BookRepo: https://github.com/btcba/hugo-book
+  BookRepo: https://github.com/DYN-dev2024/DYN-dev2024.github.io
 
   # Enable "Edit this page" links for 'doc' page type.
   # Disabled by default. Uncomment to enable. Requires 'BookRepo' param.
