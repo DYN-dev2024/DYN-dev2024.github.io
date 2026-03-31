@@ -6,6 +6,10 @@ on:
   push:
     branches:
       - main
+      
+  # 🚀 这里是你需要的定时任务！每天 UTC 时间 00:00（即北京时间早上 08:00）自动唤醒服务器执行一次
+  schedule:
+    - cron: '0 0 * * *'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -54,7 +58,8 @@ jobs:
         env:
           HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
           HUGO_ENVIRONMENT: production
-          TZ: America/Los_Angeles
+          # ⚠️ 关键修正：将时区改为中国标准时间，确保系统时间与文章设定的未来日期判定一致！
+          TZ: Asia/Shanghai
         run: |
           hugo \
             --gc \
