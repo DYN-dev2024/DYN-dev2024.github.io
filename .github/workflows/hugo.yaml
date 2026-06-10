@@ -6,6 +6,8 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - .github/last-activity.txt
       
   # 🚀 错峰定时任务！每天 UTC 时间 00:17（即北京时间早上 08:17）自动唤醒，完美避开整点拥堵
   schedule:
@@ -16,7 +18,7 @@ on:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -49,6 +51,19 @@ jobs:
         with:
           submodules: recursive
           fetch-depth: 0
+      - name: Keep repository active
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          date -u +"%Y-%m-%dT%H:%M:%SZ" > .github/last-activity.txt
+          git add .github/last-activity.txt
+          if git diff --cached --quiet; then
+            echo "No activity marker changes."
+          else
+            git commit -m "chore: keep scheduled workflow active"
+            git push
+          fi
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
